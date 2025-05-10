@@ -1,5 +1,5 @@
 # Weather-AI-Agent :
- AI agent for you weather queries.
+A conversational Weather AI Agent with a FastAPI backend (using Google Gemini, OpenWeather & ElevenLabs STT/TTS) and React for seamless text-and-voice forecasts and historical query.
 
 ![Sample Image](https://media-hosting.imagekit.io/c442d061ca09431a/f40ea915-5596-4ce6-855e-332dcdf08d5d.jpeg?Expires=1841508272&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=lynYPomo-d1YBupABzmK1pbUDqOsRwGHnRRwXmsAq~bnGOZco7G4k4PujZj-8iDS0JOVIO39pln1JtjbAuUWIaq84gc17V2qlEF~SbE9Uytib5v2~6-B28UUivW9zny9QOMk3zMxwHUJ4YAmvydneKcUf7TQ2Ljb4gt1een3XcHkDgpEgE0MLrTNnO6GBPQthCcNKCg7MUPxp8S35oLsGSvSAGZxYZYSy9ZwoRy4vNq27JhXcSAyIwbOyXHupbf7CtrKGiZszmza3Ql4l53psI3AsLtN4lRhwTJqxSTtoMbs0sw2nbva9DwNeKlo6ufS7cFyHMuSAF03rIvtxNxQbA__)
 
