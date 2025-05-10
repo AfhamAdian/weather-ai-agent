@@ -1,6 +1,5 @@
 # Project Name
-
-AI agent for your weather quaries. 
+Weather-ai-agent : AI agent for you weather queries.
 
 ![Sample Image](https://media-hosting.imagekit.io/c442d061ca09431a/f40ea915-5596-4ce6-855e-332dcdf08d5d.jpeg?Expires=1841508272&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=lynYPomo-d1YBupABzmK1pbUDqOsRwGHnRRwXmsAq~bnGOZco7G4k4PujZj-8iDS0JOVIO39pln1JtjbAuUWIaq84gc17V2qlEF~SbE9Uytib5v2~6-B28UUivW9zny9QOMk3zMxwHUJ4YAmvydneKcUf7TQ2Ljb4gt1een3XcHkDgpEgE0MLrTNnO6GBPQthCcNKCg7MUPxp8S35oLsGSvSAGZxYZYSy9ZwoRy4vNq27JhXcSAyIwbOyXHupbf7CtrKGiZszmza3Ql4l53psI3AsLtN4lRhwTJqxSTtoMbs0sw2nbva9DwNeKlo6ufS7cFyHMuSAF03rIvtxNxQbA__)
 
@@ -8,7 +7,7 @@ AI agent for your weather quaries.
 ---
 
 ## Getting Started
-
+This project is built with fastAPI server and a REACT frontend. Gemini 2.0 flash and elevelabs funcionalities are used as AI components.
 Follow these steps to set up and run the project locally.
 
 ### 1. Clone the Repository
