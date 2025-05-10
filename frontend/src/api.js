@@ -18,10 +18,9 @@ export const sendVoice = async (file, sessionId) => {
   const form = new FormData();
   form.append('file', file);
   if (sessionId) form.append('session_id', sessionId);
+
   try {
-    const res = await api.post('/sendvoice', form, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    });
+    const res = await api.post('/sendvoice', form);
     return res.data;
   } catch (err) {
     console.error('Error sending voice:', err);

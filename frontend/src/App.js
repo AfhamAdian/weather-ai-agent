@@ -23,16 +23,25 @@ function App() {
   };
 
   const handleVoice = async (file) => {
-    setMessages(prev => [...prev, { sender: 'user', text: '🎤 Voice Message' }]);
+    // setMessages(prev => [...prev, { sender: 'user', text: '🎤 Voice Message sending....' }]);
     setIsLoading(true);
     try {
       const { success, response, error } = await api.sendVoice(file, sessionId);
-      setMessages(prev => [...prev, { sender: 'bot', text: success ? response : `Error: ${error}` }]);
+      setMessages(prev => [...prev, { sender: 'user', text: success ? response : `Error: ${error}` }]);
+
+      if(success) {
+        const { success: botSuccess, response: botResponse, error: botError } = await api.sendMsg(response);
+        setMessages(prev => [...prev, { sender: 'bot', text: botSuccess ? botResponse : `Error: ${botError}` }]);
+      } else {
+        setMessages(prev => [...prev, { sender: 'user', text: `Error: ${response}` }]);
+      }
     } catch (err) {
-      setMessages(prev => [...prev, { sender: 'bot', text: `Error: ${err.message}` }]);
+      setMessages(prev => [...prev, { sender: 'user', text: `Error: ${err.message}` }]);
     } finally {
       setIsLoading(false);
     }
+    
+
   };
 
   return (

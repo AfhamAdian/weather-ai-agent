@@ -1,8 +1,13 @@
 from fastapi import FastAPI, Request, Form, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-# from pydantic import BaseModel
-# import asyncio
-# from typing import Optional
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import uuid
+from typing import Optional
+from io import BytesIO
+from elevenlabs.client import ElevenLabs
+
 import os
 import json
 
@@ -48,35 +53,67 @@ async def send_message(request: Request):
 
 
 
-# @app.post("/sendvoice")
-# async def send_voice(file: UploadFile = File(...), session_id: Optional[str] = Form(None)):
-#     """
-#     Process a voice message and return a response
-#     """
-#     try:
-#         # Save the uploaded audio file
-#         file_path = f"temp_audio_{session_id}.wav"
-#         with open(file_path, "wb") as f:
-#             content = await file.read()
-#             f.write(content)
-        
-#         # Here you would use a speech-to-text service to convert the audio to text
-#         # For now, we'll just return that this feature is coming soon
-#         return {
-#             "success": True,
-#             "response": "Voice message processing is coming soon!",
-#             "session_id": session_id
-#         }
-#     except Exception as e:
-#         return {
-#             "success": False,
-#             "error": str(e),
-#             "session_id": session_id
-#         }
 
-# # Helper function to process queries asynchronously
-# async def process_query_async(query: str):
-#     # Create a separate thread to run the CPU-bound processing
-#     loop = asyncio.get_event_loop()
-#     result = await loop.run_in_executor(None, ans_to_user_query, query)
-#     return result
+client = ElevenLabs(
+  api_key=os.getenv("ELEVENLABS_API_KEY"),
+)
+
+# Create audio directory if it doesn't exist
+os.makedirs("audio_files", exist_ok=True)
+
+# Mount static files directory to serve audio files
+app.mount("/audio", StaticFiles(directory="audio_files"), name="audio")
+
+@app.post("/sendvoice")
+async def send_voice(file: UploadFile = File(...), session_id: Optional[str] = Form(None)):
+    """
+    Process a voice message and return a response with a playable audio URL
+    """
+    try:
+        audio_bytes = await file.read()
+        audio_stream = BytesIO(audio_bytes)
+
+        # Generate unique filename
+        file_id = str(uuid.uuid4())
+        file_path = f"audio_files/{file_id}.wav"
+        
+        # Save the uploaded audio file
+        with open(file_path, "wb") as f:
+            f.write(audio_bytes)  
+        
+        # Generate URL for this audio file
+        audio_url = f"/audio/{file_id}"
+        
+        # Here you would use a speech-to-text service
+        # For now, we'll return the audio URL so it can be played
+        transcription = client.speech_to_text.convert(
+            file=audio_stream,
+            model_id="scribe_v1",       # Model to use
+            tag_audio_events=True,      # Tag audio events like laughter, applause, etc.
+            language_code="eng",        # Language of the audio file
+            diarize=True                # Annotate who is speaking
+        )
+
+
+        return {
+            "success": True,
+            "response": transcription.text,
+            "audio_url": audio_url,
+            "session_id": session_id
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "session_id": session_id
+        }
+
+@app.get("/audio/{file_id}")
+async def get_audio(file_id: str):
+    """
+    Retrieve an audio file by ID
+    """
+    file_path = f"audio_files/{file_id}.wav"
+    if not os.path.exists(file_path):
+        return {"error": "Audio file not found"}
+    return FileResponse(file_path)
