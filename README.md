@@ -1,39 +1,78 @@
-There is a FASTAPI server with a React frontend.
+# Project Name
 
-Steps:
-1. Clone the repo
-2. Setup the agent-server
-3. Setup the frontend
-4. Run the agent server
-5. Run the frontend
+A full-stack application powered by a FASTAPI backend and a React frontend.
 
+---
 
-Explanation:
+## Getting Started
 
-A. Setting up agent-server
-steps :
-    Cd agent-server
+Follow these steps to set up and run the project locally.
 
-    python3 -m venv venv
-    source venv/bin/activate
+### 1. Clone the Repository
 
-    pip install -r requirements.txt
+```bash
+git clone <repository_url>
+cd <repository_folder>
+```
 
-    create a .env file in agent-server directory 
-        GOOGLE_API_KEY=y3E
-        OPENWEATHER_API_KEY=
-        ELEVENLABS_API_KEY=
-    paste these API-KEYs
+---
 
-    Then run the server with in port 8000 :
-    uvicorn main:app --reload 
+## Backend Setup (agent-server)
 
+### Step 1: Environment Setup
 
+```bash
+cd agent-server
 
-B. Setting up the frontend 
-steps :
-    cd frontend
+# Create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate
 
-    npm install
+# Install dependencies
+pip install -r requirements.txt
+```
 
-    npm start
+### Step 2: Environment Variables
+
+Create a `.env` file inside the `agent-server` directory with the following contents:
+
+```
+GOOGLE_API_KEY=your_google_api_key
+OPENWEATHER_API_KEY=your_openweather_api_key
+ELEVENLABS_API_KEY=your_elevenlabs_api_key
+```
+
+Replace the placeholders with your actual API keys.
+
+### Step 3: Run the Backend Server
+
+```bash
+uvicorn main:app --reload
+```
+
+The backend server will be available at `http://localhost:8000`.
+
+---
+
+## Frontend Setup (React)
+
+```bash
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm start
+```
+
+The frontend will run at `http://localhost:3000`.
+
+---
+
+## Notes
+
+- Make sure the backend server is running before starting the frontend.
+- If needed, update the frontend's API base URL to match the backend server.
+
+---
