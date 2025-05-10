@@ -28,8 +28,10 @@ function App() {
     try {
       const { success, response, error } = await api.sendVoice(file, sessionId);
       setMessages(prev => [...prev, { sender: 'user', text: success ? response : `Error: ${error}` }]);
+      console.log('Voice response:', response);
 
       if(success) {
+        console.log('Voice response: from inside' , response);
         const { success: botSuccess, response: botResponse, error: botError } = await api.sendMsg(response);
         setMessages(prev => [...prev, { sender: 'bot', text: botSuccess ? botResponse : `Error: ${botError}` }]);
       } else {

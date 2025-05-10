@@ -27,3 +27,14 @@ export const sendVoice = async (file, sessionId) => {
     return { success: false, error: err.message };
   }
 };
+
+
+export const sendTextToSpeech = async (text) => {
+  try {
+    const res = await api.post('/text_to_speech', { text }, { responseType: 'blob' });
+    return res.data;
+  } catch (err) {
+    console.error('Error sending TTS:', err);
+    return { success: false, error: err.message };
+  }
+}
