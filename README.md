@@ -1,4 +1,4 @@
-There is a FASTAPI server and a React frontend
+There is a FASTAPI server with a React frontend.
 
 Steps:
 1. Clone the repo
@@ -10,7 +10,8 @@ Steps:
 
 Explanation:
 
-A. Setting up agent-server:
+A. Setting up agent-server
+steps :
     Cd agent-server
 
     python3 -m venv venv
@@ -29,7 +30,8 @@ A. Setting up agent-server:
 
 
 
-B. Setting up the frontend :
+B. Setting up the frontend 
+steps :
     cd frontend
 
     npm install
