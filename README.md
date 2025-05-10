@@ -10,13 +10,13 @@ Steps:
 
 Explanation:
 
-2. Setting up agent-server:
+A. Setting up agent-server:
     Cd agent-server
 
-    python -m venv venv
+    python3 -m venv venv
     source venv/bin/activate
 
-    pip install -r agent-server/requirements.txt
+    pip install -r requirements.txt
 
     create a .env file in agent-server directory 
         GOOGLE_API_KEY=y3E
@@ -29,7 +29,7 @@ Explanation:
 
 
 
-3. Setting up the frontend
+B. Setting up the frontend :
     cd frontend
 
     npm install
