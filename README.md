@@ -46,6 +46,8 @@ Replace the placeholders with your actual API keys.
 
 ### Step 3: Run the Backend Server
 
+Before running the server, make sure you are authorized in firsestore, otherwise commentout line no 38-51 agent-server/agent_utils.js
+
 ```bash
 uvicorn main:app --reload
 ```
